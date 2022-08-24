@@ -1,0 +1,9 @@
+bs4
+lxml
+requests
+requests[socks]
+gunicorn
+PySocks
+pyTelegramBotAPI
+urllib3
+numpy
