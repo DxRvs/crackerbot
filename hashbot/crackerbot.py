@@ -6,7 +6,7 @@ import numpy
 
 
 class CracerBotService(object):
-    BOT_VERSION = "0.7b"
+    BOT_VERSION = "0.8b"
     STATE_FREE = 'STATE_FREE'
     STATE_CREATE_TASK_NAME = 'STATE_CREATE_TASK_NAME'
     STATE_CREATE_TASK_HASH = 'STATE_CREATE_TASK_HASH'
@@ -221,7 +221,8 @@ class CracerBotService(object):
             files = self.cjs.getFiles(sess_id)
             for  fl in files:
                 if "screen.log" in fl:
-                    self.telegramBot.send_document(chat_id=call.message.chat.id, data=self.cjs._downloadFile(sess_id, fl), caption=fl, visible_file_name=fl)
+                    cont=self.cjs._downloadFile(sess_id, fl)
+                    self.telegramBot.send_document(chat_id=call.message.chat.id, document=cont, caption=fl, visible_file_name=fl)
         if "task_result" in call.data:
             m, sess_id = call.data.split("$")
             s = self.cjs.getSessionWithID(sess_id)

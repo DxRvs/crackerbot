@@ -275,7 +275,7 @@ class CJService(object):
         result = self._get(self.url + "/sessions/" + str(session_id) + "/setup/mask")
         csrf = self._getCSRF(result.content)
         count = mask.count("?")
-        data = {'csrf_token': (None, csrf), 'compiled-mask':(None, mask), 'mask-max-characters':(None, str(count))} 
+        data = {'csrf_token': (None, csrf),'mask_type':(None,str(2)), 'compiled-mask':(None, mask), 'mask-max-characters':(None, str(count))} 
         result = self._post(self.url + "/sessions/" + str(session_id) + "/setup/mask/save", data=data, allow_redirects=False)
         if result.status_code == 302:
                 return True
@@ -285,7 +285,7 @@ class CJService(object):
     def setMaskWithIncrement(self, session_id, mask,minlen=1,maxlen=9):
         result = self._get(self.url + "/sessions/" + str(session_id) + "/setup/mask")
         csrf = self._getCSRF(result.content)
-        data = {'csrf_token': (None, csrf),'enable_increments':(None,"1"),'increment-min':(None,str(minlen)), 'increment-max':(None,str(maxlen)),  'compiled-mask':(None, mask), 'mask-max-characters':(None, str(maxlen))} 
+        data = {'csrf_token': (None, csrf),'enable_increments':(None,"1"),'mask_type':(None,str(2)),'increment-min':(None,str(minlen)), 'increment-max':(None,str(maxlen)),  'compiled-mask':(None, mask), 'mask-max-characters':(None, str(maxlen))} 
         result = self._post(self.url + "/sessions/" + str(session_id) + "/setup/mask/save", data=data, allow_redirects=False)
         if result.status_code == 302:
                 return True
